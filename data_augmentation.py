@@ -2,7 +2,7 @@ from keras.preprocessing.image import ImageDataGenerator
 
 
 dataGeneration = ImageDataGenerator(rotation_range=5, horizontal_flip=True, 
-									width_shift_range=0.2, height_shift_range=0.2)
+				     width_shift_range=0.2, height_shift_range=0.2)
 files = {"file1": 193, "file2": 400, "file3": 236}
 for file in files.keys():
     i = 0
