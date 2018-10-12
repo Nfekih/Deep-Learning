@@ -84,6 +84,7 @@ for class_ in classes:
 		labels.append(i)
 
 x_train = np.asarray(data)
+x_train /= 255
 y_train = np.asarray(labels)
 y_train = np_utils.to_categorical(y_train)
 
