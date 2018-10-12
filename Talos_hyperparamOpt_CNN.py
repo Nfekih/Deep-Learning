@@ -16,34 +16,35 @@ def CNNmodel(x_train, y_train, x_val, y_val, params):
 
 	model = Sequential()
 	model.add(Convolution2D(filters=16, 
-							kernel_size=(3,3), 
-							padding="same", 
-							activation=relu, 
-							use_bias=True, 
-							input_shape=x_train.shape[1:]))
+				kernel_size=(3,3), 
+				padding="same", 
+				activation=relu, 
+				use_bias=True, 
+				input_shape=x_train.shape[1:]))
 	model.add(Dropout(rate=.5))
 	model.add(Convolution2D(filters=16, 
-							kernel_size=(3,3),
-							padding="same",
-							activation=relu))
+				kernel_size=(3,3),
+				padding="same",
+				activation=relu))
 	model.add(Dropout(rate=.5))
 	model.add(MaxPooling2D(pool_size=(2,2), 
-							strides=2)) 
+			       strides=2)) 
 	model.add(BatchNormalization(axis=-1))  
 	model.add(Convolution2D(filters=32, 
-							kernel_size=(3, 3), 
-							activation=relu, 
-							use_bias=True))
+				kernel_size=(3, 3), 
+				activation=relu, 
+				use_bias=True))
 	model.add(Convolution2D(filters=64, 
-							kernel_size=(3, 3), 
-							activation=relu, 
-							use_bias=True))
+				kernel_size=(3, 3), 
+				activation=relu, 
+				use_bias=True))
 	model.add(MaxPooling2D(pool_size=(2,2), 
-							strides=2))
+				strides=2))
 	model.add(Flatten())
 	model.add(Dense(output_dim=128))
 	model.add(Activation(activation=relu))
-	model.add(Dense(output_dim=y_train.shape[1], activation=softmax))
+	model.add(Dense(output_dim=y_train.shape[1], 
+			activation=softmax))
 
 	METRICS = ["accuracy"]
 	LOSS = categorical_crossentropy
@@ -57,10 +58,10 @@ def CNNmodel(x_train, y_train, x_val, y_val, params):
 	EPOCHS = params["epochs"]
 
 	history = model.fit(x_train, y_train, 
-						validation_split=.2,
-	                    batch_size=BATCH_SIZE,
-	                    epochs=EPOCHS,
-	                    verbose=1)
+				validation_split=.2,
+				batch_size=BATCH_SIZE,
+				epochs=EPOCHS,
+				verbose=1)
 
 	return history, model
 
